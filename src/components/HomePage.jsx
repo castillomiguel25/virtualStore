@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Themes from '@components/Theme';
-// import Footer from '@components/Footer';
 import Footer from '@components/Footer';
 import Promo from './Promo';
 import Tips from './Tips';
@@ -17,35 +16,27 @@ import Select from './Lenguaje';
 
 const Group = () => {
 
-  const [darkMode, setDarkMode] = useState(true);
-
-  const handleDarkModeChange = (newDarkMode) => {
-    try {
-      setDarkMode(newDarkMode);
-      localStorage.setItem('darkModee', JSON.stringify(newDarkMode));
-    } catch (error) {
-      console.error('Error al guardar el tema en el localStorage:', error);
-    }
-  };
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    try {
-      const savedDarkMode = localStorage.getItem('darkModee');
-      if (savedDarkMode !== null) {
-        setDarkMode(JSON.parse(savedDarkMode));
-      }
-    } catch (error) {
-      console.error('Error al recuperar el tema del localStorage:', error);
+    if (typeof window !== 'undefined') {
+      const storedTheme = localStorage.getItem('theme');
+      setDarkMode(storedTheme ? JSON.parse(storedTheme) : false);
     }
   }, []);
-
 
   const { asPath, locale, locales } = useRouter();
   const translated = locale === 'en' ? en : es;
 
-  function toggleDarkMode() {
-    setDarkMode(!darkMode);
-  }
+  const toggleDarkMode = () => {
+    const updatedDarkMode = !darkMode;
+    setDarkMode(updatedDarkMode);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('theme', JSON.stringify(updatedDarkMode));
+    }
+  };
+   
+  console.log(darkMode, typeof(darkMode))
 
   return (
     <div className={`h-full mx-auto ${darkMode ? 'dark' : ''}`}>
