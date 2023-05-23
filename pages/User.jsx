@@ -4,6 +4,8 @@ import { getFirestore, doc, setDoc } from 'firebase/firestore';
 import firebaseApp from './Callfirebase/firebase';
 import Link from 'next/link';
 import { Button } from 'flowbite-react';
+import uno from '@icons/one.webp';
+import Image from 'next/image';
 
 const auth = getAuth(firebaseApp);
 const googleProvider = new GoogleAuthProvider();
@@ -107,12 +109,15 @@ function Logins() {
               </div>
             </fieldset>
           </form>
-          <div className='text-center max-w-md mx-auto p-6 flex justify-center items-center'>
+          <div className="text-center max-w-md mx-auto p-6 flex justify-center items-center">
             <Link href="/">
               <Button className='dark:bg-emerald-500 dark:hover:bg-emerald-600 bg-indigo-500 hover:bg-indigo-600 text-center'>Inicio</Button>
             </Link>
           </div>
         </div>
+      </div>
+      <div className="flex items-center justify-center px-10">
+        <Image src={uno} alt='img-presentation'></Image>
       </div>
     </div>
   );

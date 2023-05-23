@@ -6,6 +6,11 @@ const OrderCards = props => {
 
     const {id, title, images, price, handleDelete } = props
 
+    let imageDelete
+    if (handleDelete) {
+      imageDelete = <Image onClick={() => handleDelete (id)} className='h-3 w-3' src={close} alt="closed-order-card" />
+    }
+
   return (
     <div className="flex justify-between items-center mb-3 px-3">
       <div className='flex items-center gap-2'>
@@ -16,7 +21,7 @@ const OrderCards = props => {
       </div>
       <div className='flex items-center gap-2'>
         <p className='text-lg text-black dark:text-black font-medium'>${price}</p>
-        <Image onClick={() => handleDelete (id)} className='h-3 w-3' src={close} alt="closed-order-card" />
+        { imageDelete }
       </div>
     </div>
   )

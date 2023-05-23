@@ -15,7 +15,6 @@ export const useDarkModeLogic = () => {
     //   logica para abrir las lista de compra
     const [checkoutOrders, setcheckoutOrders] = useState(false);
 
-
     // logica para abrir configuraciones
     const [toggle, setToggle] = useState(false);
     const handleToggle = () => {
@@ -34,6 +33,6 @@ export const useDarkModeLogic = () => {
         toggleDarkMode,
         state,
         checkoutOrders,
-        setcheckoutOrders
+        setcheckoutOrders,
     };
 };

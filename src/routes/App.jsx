@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Home from '@pages/Home';
-import House from '../../pages/House';
+import Home from '@pages/HomeUser';
+import House from '../../pages/HomeInitial';
 // import Register from "../register/Register"
 import firebaseApp from '../../pages/Callfirebase/firebase';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
