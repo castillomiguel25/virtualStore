@@ -21,6 +21,9 @@ const useInitialState = () => {
     const [productCart, setProductCart] = useState([])
     const [isVisibleCheck, setIsVisibleCheck] = useState(true);
 
+    // logica del buscado
+    const [searchTitle, setSearchTitle] = useState('')
+    const [filteredItems, setFilteredItems] = useState(null);
     // logica del api
 
     const [items, setItems] = useState(null);
@@ -31,13 +34,17 @@ const useInitialState = () => {
             .then(data => setItems(data));
     }, []);
 
-    // logica del buscado
-    const [searchTitle, setSearchTitle] = useState([])
-    console.log(searchTitle, 'hola')
+    const filteredByTitle = (items, searchTitle) => {
+        return items?.filter(item => item.title.toLowerCase().includes(searchTitle.toLowerCase()));
+      }
+
+    useEffect(() => {
+        if (searchTitle) setFilteredItems(filteredByTitle(items, searchTitle ))
+    }, [items, searchTitle ])
 
     return {
         setProductCart, productCart, productToShow, setProductToShow, count, setCount, isVisible, setIsVisible, isVisibleCheck,
-        setIsVisibleCheck, order, setOrder, isOpen, setIsOpen, searchTitle, setSearchTitle, items, setItems
+        setIsVisibleCheck, order, setOrder, isOpen, setIsOpen, searchTitle, setSearchTitle, items, setItems, filteredItems
     }
 }
 export default useInitialState;

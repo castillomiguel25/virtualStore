@@ -4,7 +4,35 @@ import Card from '@components/Cards';
 
 const ProductsCards = () => {
 
-    const { searchTitle, setSearchTitle, items, setItems } = useContext(AppContext);
+    const { searchTitle, setSearchTitle, items, setItems, filteredItems } = useContext(AppContext);
+
+    const renderView = () => {
+
+        if (searchTitle?.length > 0) {
+            if (filteredItems?.length > 0) {
+                console.log('seraaa')
+                return (
+                    filteredItems?.slice(10, 13).map(item => (
+                        <Card key={item.id} data={item} />
+                    ))
+                )
+            }
+            else {
+                return (
+                    <div>
+                        <h3>No existe...</h3>
+                    </div>
+                )
+            }
+        } else {
+            console.log('ok')
+            return (
+                items?.slice(100, 125).map(item => (
+                    <Card key={item.id} data={item} />
+                ))
+            )
+        }
+    }
 
     return (
         <div>
@@ -21,9 +49,7 @@ const ProductsCards = () => {
             </div>
 
             <div className="lg:grid lg:grid-cols-3 place-items-center mt-5 w-full  px-10">
-                {items?.slice(100, 125).map(item => (
-                    <Card key={item.id} data={item} />
-                ))}
+                {renderView()}
             </div>
         </div>
     )
