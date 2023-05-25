@@ -44,13 +44,29 @@ const useInitialState = () => {
   };
 
   const filteredItemsByCategory = (items, searchByCategory) => {
-    console.log(items)
     return items?.filter((item) => item.category.name.toLowerCase().includes(searchByCategory.toLowerCase()));
   };
 
+  const filterBy = (searchType, items, searchTitle, searchByCategory) => {
+    if (searchType === 'BY_TITLE') {
+      return filteredByTitle(items, searchTitle)
+    }
+    if (searchType === 'BY_CATEGORY') {
+      return filteredItemsByCategory(items, searchByCategory)
+    }
+    if (!searchType) {
+      return items
+    }
+    if (searchType === 'BY_TITLE_AND_CATEGORY') {
+      return filteredItemsByCategory(items, searchByCategory).filter(item => item.title.toLowerCase().includes(searchTitle.toLowerCase()))
+    }
+  }
+
   useEffect(() => {
-    if (searchTitle) setFilteredItems(filteredByTitle(items, searchTitle));
-    if (searchByCategory) setFilteredItems(filteredItemsByCategory(items, searchByCategory));
+    if (searchTitle && searchByCategory) setFilteredItems(filterBy('BY_TITLE_AND_CATEGORY', items, searchTitle, searchByCategory));
+    if (searchTitle && !searchByCategory) setFilteredItems(filterBy('BY_TITLE', items, searchTitle, searchByCategory));
+    if (searchByCategory && !searchTitle) setFilteredItems(filterBy('BY_CATEGORY', items, searchTitle, searchByCategory));
+    if (!searchByCategory && !searchTitle) setFilteredItems(filterBy(null, items, searchTitle, searchByCategory));
 
   }, [items, searchTitle, searchByCategory]);
 

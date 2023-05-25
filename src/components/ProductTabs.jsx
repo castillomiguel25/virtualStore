@@ -1,36 +1,75 @@
-import React,{useContext} from 'react';
+import React, { useContext, useState } from 'react';
 import ProductsCards from './ProductsCards';
-import { Tabs } from 'flowbite-react';
+import { Button } from 'flowbite-react';
 import AppContext from '@context/AppContext';
 
 const ProductTabs = () => {
 
-  const { setSearchByCategory, searchByCategory } = useContext(AppContext);
+  const { setSearchByCategory } = useContext(AppContext);
+
+  const [activeTab, setActiveTab] = useState(1);
+
+  const handleTabClick = (tabIndex, category) => {
+    setActiveTab(tabIndex);
+    setSearchByCategory(category);
+  };
+
+  const resetTabs = () => {
+    setActiveTab(1);
+    setSearchByCategory(null)
+  };
 
   return (
     <div className="my-10 px-10">
-      <Tabs.Group aria-label="Pills">
-        <Tabs.Item active={true} title="Products 1" className="text-white dark:bg-emerald-500 bg-indigo-500">
-          <div className="flex">
+      <div className="tab-list flex">
+        <Button
+          className={activeTab === 1 ? 'active' : 'ml-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-md shadow-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gradient-to-r dark:from-emerald-500 dark:to-emerald-600 dark:text-white'}
+          onClick={resetTabs}
+        >
+          All
+        </Button>
+        <Button
+          className={activeTab === 2 ? 'active' : 'ml-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-md shadow-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gradient-to-r dark:from-emerald-500 dark:to-emerald-600 dark:text-white'}
+          onClick={() => handleTabClick(1, 'Shoes')}
+        >
+         Shoes
+        </Button>
+        <Button
+          className={activeTab === 3 ? 'active' : 'ml-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-md shadow-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gradient-to-r dark:from-emerald-500 dark:to-emerald-600 dark:text-white'}
+          onClick={() => handleTabClick(1, 'Electronics')}
+        >
+          Electronics
+        </Button>
+        <Button
+          className={activeTab === 4 ? 'active' : 'ml-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-md shadow-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gradient-to-r dark:from-emerald-500 dark:to-emerald-600 dark:text-white'}
+          onClick={() => handleTabClick(1, 'Furniture')}
+        >
+          Furniture
+        </Button>
+      </div>
+
+      <div className="tab-content">
+        {activeTab === 1 && (
+          <div>
             <ProductsCards />
           </div>
-        </Tabs.Item>
-        <Tabs.Item onClick={() => setSearchByCategory('others')} title="Products 2" className="">
-          <div className="flex">
+        )}
+        {activeTab === 2 && (
+          <div>
             <ProductsCards />
           </div>
-        </Tabs.Item>
-        <Tabs.Item onClick={() => setSearchByCategory('clothes')} title="Products 3" className="dark:bg-emerald-500 bg-indigo-500 text-white">
-          <div className="flex">
-            <ProductsCards />
+        )}
+        {activeTab === 3 && (
+          <div>
+           <ProductsCards />
           </div>
-        </Tabs.Item>
-        <Tabs.Item onClick={() => setSearchByCategory('toys')} title="Products 4" className="dark:bg-emerald-500 bg-indigo-500 text-white">
-          <div className="flex">
-            <ProductsCards />
+        )}
+        {activeTab === 4 && (
+          <div>
+           <ProductsCards />
           </div>
-        </Tabs.Item>
-      </Tabs.Group>
+        )}
+      </div>
     </div>
   );
 };

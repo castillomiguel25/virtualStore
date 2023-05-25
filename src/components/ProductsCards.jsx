@@ -3,10 +3,10 @@ import AppContext from '@context/AppContext';
 import Card from '@components/Cards';
 
 const ProductsCards = () => {
-  const { searchTitle, setSearchTitle, items, filteredItems } = useContext(AppContext);
+  const { setSearchTitle, filteredItems } = useContext(AppContext);
 
   const renderView = () => {
-    if (searchTitle?.length > 0) {
+    
       if (filteredItems?.length > 0) {
         return filteredItems?.slice(10, 20).map((item) => <Card key={item.id} data={item} />);
       } else {
@@ -16,9 +16,6 @@ const ProductsCards = () => {
           </div>
         );
       }
-    } else {
-      return items?.slice(25, 50).map((item) => <Card key={item.id} data={item} />);
-    }
   };
 
   return (
