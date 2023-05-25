@@ -15,7 +15,7 @@ const Tips = () => {
 
       <div className="sm:grid lg:flex sm:grid-cols-2">
         <div>
-          <Image src={uno} alt='img-presentation'></Image>
+          <Image src={uno} alt="img-presentation"></Image>
         </div>
         <div className="ml-10">
           <p className="text-1xl mt-5">TIENDA EN LÍNEA</p>

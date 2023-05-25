@@ -1,50 +1,81 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 const useInitialState = () => {
+  // Shopping Cart · Increment quantity
+  const [count, setCount] = useState(0);
 
-    // Shopping Cart · Increment quantity
-    const [count, setCount] = useState(0)
+  // logica del api
 
-    // logica para mostrar productos
-    const [productToShow, setProductToShow] = useState({})
+  const [items, setItems] = useState(null);
 
-    // logica para cerrar productos
-    const [isVisible, setIsVisible] = useState(true);
+  useEffect(() => {
+    fetch('https://api.escuelajs.co/api/v1/products')
+      .then((response) => response.json())
+      .then((data) => setItems(data));
+  }, []);
 
-    // logica para myOrders
-    const [order, setOrder] = useState([])
+  // logica para mostrar productos
+  const [productToShow, setProductToShow] = useState({});
 
-    // logica para abrir el modal
-    const [isOpen, setIsOpen] = useState(false);
+  // logica para cerrar productos
+  const [isVisible, setIsVisible] = useState(true);
 
-    // logica para un carrito
-    const [productCart, setProductCart] = useState([])
-    const [isVisibleCheck, setIsVisibleCheck] = useState(true);
+  // logica para myOrders
+  const [order, setOrder] = useState([]);
 
-    // logica del buscado
-    const [searchTitle, setSearchTitle] = useState('')
-    const [filteredItems, setFilteredItems] = useState(null);
-    // logica del api
+  // logica para abrir el modal
+  const [isOpen, setIsOpen] = useState(false);
 
-    const [items, setItems] = useState(null);
+  // logica para un carrito
+  const [productCart, setProductCart] = useState([]);
+  const [isVisibleCheck, setIsVisibleCheck] = useState(true);
 
-    useEffect(() => {
-        fetch('https://api.escuelajs.co/api/v1/products')
-            .then(response => response.json())
-            .then(data => setItems(data));
-    }, []);
+  // logica del buscador
+  const [searchTitle, setSearchTitle] = useState('');
+  const [filteredItems, setFilteredItems] = useState(null);
 
-    const filteredByTitle = (items, searchTitle) => {
-        return items?.filter(item => item.title.toLowerCase().includes(searchTitle.toLowerCase()));
-      }
+  // logica de category
+  const [searchByCategory, setSearchByCategory] = useState('');
 
-    useEffect(() => {
-        if (searchTitle) setFilteredItems(filteredByTitle(items, searchTitle ))
-    }, [items, searchTitle ])
+  // functions
 
-    return {
-        setProductCart, productCart, productToShow, setProductToShow, count, setCount, isVisible, setIsVisible, isVisibleCheck,
-        setIsVisibleCheck, order, setOrder, isOpen, setIsOpen, searchTitle, setSearchTitle, items, setItems, filteredItems
-    }
-}
+  const filteredByTitle = (items, searchTitle) => {
+    return items?.filter((item) => item.title.toLowerCase().includes(searchTitle.toLowerCase()));
+  };
+
+  const filteredItemsByCategory = (items, searchByCategory) => {
+    console.log(items)
+    return items?.filter((item) => item.category.name.toLowerCase().includes(searchByCategory.toLowerCase()));
+  };
+
+  useEffect(() => {
+    if (searchTitle) setFilteredItems(filteredByTitle(items, searchTitle));
+    if (searchByCategory) setFilteredItems(filteredItemsByCategory(items, searchByCategory));
+
+  }, [items, searchTitle, searchByCategory]);
+
+  return {
+    setProductCart,
+    productCart,
+    productToShow,
+    setProductToShow,
+    count,
+    setCount,
+    isVisible,
+    setIsVisible,
+    isVisibleCheck,
+    setIsVisibleCheck,
+    order,
+    setOrder,
+    isOpen,
+    setIsOpen,
+    searchTitle,
+    setSearchTitle,
+    items,
+    setItems,
+    filteredItems,
+    searchByCategory,
+    setSearchByCategory
+  };
+};
 export default useInitialState;

@@ -15,7 +15,6 @@ import en from '../../translated/en';
 import Select from './Lenguaje';
 
 const Group = () => {
-
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
@@ -35,28 +34,30 @@ const Group = () => {
       localStorage.setItem('theme', JSON.stringify(updatedDarkMode));
     }
   };
-   
-  console.log(darkMode, typeof(darkMode))
+
+  console.log(darkMode, typeof darkMode);
 
   return (
     <div className={`h-full mx-auto ${darkMode ? 'dark' : ''}`}>
-      <Navbar className='fixed dark:bg-black z-50 w-full top-0' fluid={true} rounded={true}>
+      <Navbar className="fixed dark:bg-black z-50 w-full top-0" fluid={true} rounded={true}>
         <Navbar.Brand href="https://flowbite.com/">
           <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
           <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Flowbite</span>
         </Navbar.Brand>
         <div className="flex md:order-2">
-          <Button className='dark:bg-emerald-500 dark:hover:bg-emerald-600 bg-indigo-500 hover:bg-indigo-600 mr-5 hidden lg:block' href="/User">PROBAR</Button>
-          <Navbar.Toggle className='hidden lg:block' />
+          <Button className="dark:bg-emerald-500 dark:hover:bg-emerald-600 bg-indigo-500 hover:bg-indigo-600 mr-5 hidden lg:block" href="/User">
+            PROBAR
+          </Button>
+          <Navbar.Toggle className="hidden lg:block" />
         </div>
         <Navbar.Collapse>
           <Navbar.Link active={true}>
             <Themes darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
           </Navbar.Link>
-          <Navbar.Link href='/Form' className='mt-3'>
-            <h3 className='cursor-pointer'>CONTÁCTANOS</h3>
+          <Navbar.Link href="/Form" className="mt-3">
+            <h3 className="cursor-pointer">CONTÁCTANOS</h3>
           </Navbar.Link>
-          <Navbar.Link className='mt-3'>
+          <Navbar.Link className="mt-3">
             <Select />
           </Navbar.Link>
         </Navbar.Collapse>
@@ -67,10 +68,10 @@ const Group = () => {
         <h3 className="mb-8 text-3xl font-bold">{translated.news.subtitle}</h3>
         <div className="grid place-items-center">
           <div className="">
-            <Image src={uno} alt='Image-page-init'></Image>
+            <Image src={uno} alt="Image-page-init"></Image>
           </div>
         </div>
-        <div className="mb-5">{ }</div>
+        <div className="mb-5">{}</div>
         <Link
           className="inline-block rounded bg-indigo-500 dark:bg-black px-6 pt-2.5 pb-2 text-xs
            font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition 

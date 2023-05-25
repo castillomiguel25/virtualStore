@@ -88,13 +88,7 @@ function Logins() {
               </div>
 
               <div className="flex flex-col items-center">
-                <input
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  type="submit"
-                  value={isRegister ? 'Registrar' : 'Iniciar Sesión'}
-                  name="submit"
-                  id="submit"
-                />
+                <input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit" value={isRegister ? 'Registrar' : 'Iniciar Sesión'} name="submit" id="submit" />
 
                 <div className="google-btn text-center cursor-pointer mt-5" onClick={handleAuth}>
                   <div className="google-icon-wrapper text-center"></div>
@@ -111,13 +105,13 @@ function Logins() {
           </form>
           <div className="text-center max-w-md mx-auto p-6 flex justify-center items-center">
             <Link href="/">
-              <Button className='dark:bg-emerald-500 dark:hover:bg-emerald-600 bg-indigo-500 hover:bg-indigo-600 text-center'>Inicio</Button>
+              <Button className="dark:bg-emerald-500 dark:hover:bg-emerald-600 bg-indigo-500 hover:bg-indigo-600 text-center">Inicio</Button>
             </Link>
           </div>
         </div>
       </div>
       <div className="flex items-center justify-center px-10">
-        <Image src={uno} alt='img-presentation'></Image>
+        <Image src={uno} alt="img-presentation"></Image>
       </div>
     </div>
   );

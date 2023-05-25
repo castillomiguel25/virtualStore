@@ -1,6 +1,4 @@
-import App from "../src/routes/App"
+import App from '../src/routes/App';
 export default function Home() {
-  return (
-   <App />
-  )
+  return <App />;
 }

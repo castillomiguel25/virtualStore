@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
-import useInitialState from "../hooks/useInitialState";
-import AppContext from "@context/AppContext";
+import React, { useState, useEffect } from 'react';
+import useInitialState from '../hooks/useInitialState';
+import AppContext from '@context/AppContext';
 import Layout from '@containers/Layout';
 import Body from '@components/Body';
-import ProductsCards from "@components/ProductsCards";
-
 
 const Home = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -30,11 +28,7 @@ const Home = () => {
     <div className={`${darkMode ? 'dark' : ''}`}>
       <AppContext.Provider value={initialState}>
         <Layout>
-
           <Body darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-
-          <ProductsCards />
-
         </Layout>
       </AppContext.Provider>
     </div>

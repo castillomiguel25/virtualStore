@@ -5,8 +5,8 @@ const nextConfig = {
   },
   reactStrictMode: true,
   i18n: {
-    locales : ['en', 'es'],
-    defaultLocale: 'es'
+    locales: ['en', 'es'],
+    defaultLocale: 'es',
   },
   env: {
     customKey: 'customValue',
@@ -16,11 +16,11 @@ const nextConfig = {
   //   return [
   //     {
   //       // source : '/hola',
-  //       // destination: 'https://github.com/D4rkPK', 
+  //       // destination: 'https://github.com/D4rkPK',
   //       // permanent: true,
   //     }
   //   ]
   // }
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

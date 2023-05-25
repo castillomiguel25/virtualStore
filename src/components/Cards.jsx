@@ -1,11 +1,10 @@
 import React, { useContext, useState } from 'react';
 import AppContext from '@context/AppContext';
 import MyOrder from '@components/MyOrder';
-import { useDarkModeLogic } from "../hooks/logic";
+import { useDarkModeLogic } from '../hooks/logic';
 import CheckoutSide from '@components/checkoutSideMenu';
 
 const Card = ({ data, product }) => {
-
   if (!data) {
     return null;
   }
@@ -16,12 +15,7 @@ const Card = ({ data, product }) => {
     return null;
   }
 
-  const {
-    toggleOrders,
-    setToggleOrders,
-    checkoutOrders,
-    setcheckoutOrders
-  } = useDarkModeLogic();
+  const { toggleOrders, setToggleOrders, checkoutOrders, setcheckoutOrders } = useDarkModeLogic();
 
   const [isHovered, setIsHovered] = useState(false);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
@@ -35,26 +29,19 @@ const Card = ({ data, product }) => {
   };
 
   const addProductsToCart = (event, product) => {
-    event.stopPropagation()
-    setCount(count + 1)
-    setProductCart([...productCart, product])
-    setcheckoutOrders(!checkoutOrders)
-    setIsVisibleCheck(true)
+    event.stopPropagation();
+    setCount(count + 1);
+    setProductCart([...productCart, product]);
+    setcheckoutOrders(!checkoutOrders);
+    setIsVisibleCheck(true);
   };
 
   const renderIcon = (id) => {
-    const isInCart = productCart.filter(product => product.id === id).length > 0
+    const isInCart = productCart.filter((product) => product.id === id).length > 0;
 
     if (isInCart) {
-      return (
-        <button
-          className="px-3 mb-3 py-1 text-sm font-semibold text-white bg-black dark:bg-black dark:text-white"
-        >
-          Agregado
-        </button>
-      )
-    }
-    else {
+      return <button className="px-3 mb-3 py-1 text-sm font-semibold text-white bg-black dark:bg-black dark:text-white">Agregado</button>;
+    } else {
       return (
         <button
           onClick={(event) => addProductsToCart(event, data)}
@@ -62,25 +49,21 @@ const Card = ({ data, product }) => {
         >
           Comprar
         </button>
-      )
+      );
     }
-  }
+  };
 
   return (
     <div>
       {toggleOrders && <MyOrder />}
       {checkoutOrders && <CheckoutSide />}
 
-      <div
-        onClick={() => ProductsShow(data)}
-        className={`row ${isHovered ? 'hovered' : ''}`}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}>
-        <div className='col-lg-4 col-md-6 col-sm-12'>
-          <div className='bg-white cursor-pointer mb-4 mx-auto'>
-            <figure className='relative'>
-              <span className='absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5'>{category.name}</span>
-              <img className='w-full h-auto object-cover rounded-lg' src={images} alt={title} />
+      <div onClick={() => ProductsShow(data)} className={`row ${isHovered ? 'hovered' : ''}`} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+        <div className="col-lg-4 col-md-6 col-sm-12">
+          <div className="bg-white cursor-pointer mb-4 mx-auto">
+            <figure className="relative">
+              <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5">{category.name}</span>
+              <img className="w-full h-auto object-cover rounded-lg" src={images} alt={title} />
               {isHovered && (
                 <button
                   className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-3 py-1 text-sm 
@@ -93,9 +76,9 @@ const Card = ({ data, product }) => {
                 </button>
               )}
             </figure>
-            <p className='flex justify-between px-3 my-3'>
-              <span className='text-sm dark:text-black mt-1'>{title}</span>
-              <span className='text-lg rounded-lg text-black dark:text-black'>${price}</span>
+            <p className="flex justify-between px-3 my-3">
+              <span className="text-sm dark:text-black mt-1">{title}</span>
+              <span className="text-lg rounded-lg text-black dark:text-black">${price}</span>
               {renderIcon(data.id)}
             </p>
           </div>
